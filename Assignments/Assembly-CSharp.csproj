@@ -9,8 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{23079437-D6A1-7464-423E-3EE94232EA96}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -29,7 +28,6 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;USG0001</NoWarn>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-    <IntermediateOutputPath>C:\Users\gabri\AppData\Local\Temp\vs6DC4.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,7 +37,6 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169;USG0001</NoWarn>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-    <IntermediateOutputPath>C:\Users\gabri\AppData\Local\Temp\vs6DC4.tmp\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -63,7 +60,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.23f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Mechanics\Shoot.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Player\CameraFollow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

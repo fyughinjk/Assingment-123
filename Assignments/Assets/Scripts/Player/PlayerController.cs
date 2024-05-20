@@ -29,13 +29,13 @@ public class PlayerController : MonoBehaviour
         
         if (speed <= 0)
         {
-            speed = 5;
+            speed = 7;
             if (TestMode) Debug.Log("Speed set to default Value.");
         }
 
         if (jumpForce <= 0)
         {
-            jumpForce = 3;
+            jumpForce = 6;
             if (TestMode) Debug.Log("Jump Force set to default Value.");
         }
 
@@ -68,18 +68,38 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AnimatorClipInfo[] curPlayingClips = anim.GetCurrentAnimatorClipInfo(0);
 
         float xInput = Input.GetAxis("Horizontal");
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
 
-        Vector2 moveDirection = new Vector2(xInput * speed, rb.velocity.y);
+       if (curPlayingClips.Length > 0)
+        {
+            if (curPlayingClips[0].clip.name == "Attack")
+                rb.velocity = Vector2.zero;
+            else
+            {
+                Vector2 moveDirection = new Vector2(xInput * speed, rb.velocity.y);
+                  rb.velocity = moveDirection;
+            }
+        }
 
-        rb.velocity = moveDirection;
+       
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+
+        if (Input.GetButtonDown("Jump") && !isGrounded)
+        {
+            anim.SetTrigger("JumpAttack");
+        }
+
+            if ( Input.GetButtonDown("Fire1"))
+        {
+            anim.SetTrigger("Attack");
         }
 
         if (xInput != 0) sr.flipX = (xInput < 0);
