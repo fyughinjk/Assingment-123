@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|d:\\assignments\\term 2\\vgp 123\\vgp 123 a1 gabriel mansour\\assingment\\assignments\\assets\\scripts\\mechanics\\shoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mechanics\\shoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|d:\\assignments\\term 2\\vgp 123\\vgp 123 a1 gabriel mansour\\assingment\\assignments\\assets\\scripts\\mechanics\\projectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\assets\\scripts\\mechanics\\projectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mechanics\\projectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|d:\\assignments\\term 2\\vgp 123\\vgp 123 a1 gabriel mansour\\assingment\\assignments\\assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|d:\\assignments\\term 2\\vgp 123\\vgp 123 a1 gabriel mansour\\assingment\\assignments\\assets\\scripts\\player\\camerafollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\assets\\scripts\\player\\camerafollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\camerafollow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\assets\\scripts\\mechanics\\shoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mechanics\\shoot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\assets\\scripts\\mechanics\\pickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23079437-D6A1-7464-423E-3EE94232EA96}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mechanics\\pickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,37 +30,48 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "PickUp.cs",
+              "DocumentMoniker": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Mechanics\\PickUp.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Mechanics\\PickUp.cs",
+              "ToolTip": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Mechanics\\PickUp.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Mechanics\\PickUp.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T20:48:22.116Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Shoot.cs",
               "DocumentMoniker": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Mechanics\\Shoot.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Mechanics\\Shoot.cs",
               "ToolTip": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Mechanics\\Shoot.cs",
               "RelativeToolTip": "Assets\\Scripts\\Mechanics\\Shoot.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAQwAYAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T21:38:46.602Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-20T21:38:46.602Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Projectile.cs",
               "DocumentMoniker": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Mechanics\\Projectile.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Mechanics\\Projectile.cs",
               "ToolTip": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Mechanics\\Projectile.cs",
               "RelativeToolTip": "Assets\\Scripts\\Mechanics\\Projectile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAArAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-20T21:38:42.76Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "CameraFollow.cs",
               "DocumentMoniker": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Player\\CameraFollow.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\CameraFollow.cs",
@@ -64,18 +79,17 @@
               "RelativeToolTip": "Assets\\Scripts\\Player\\CameraFollow.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T16:46:21.332Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-20T16:46:21.332Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerController.cs",
               "ToolTip": "D:\\ASSIGNMENTS\\Term 2\\VGP 123\\VGP 123 A1 GABRIEL MANSOUR\\Assingment\\Assignments\\Assets\\Scripts\\Player\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerController.cs",
-              "ViewState": "AQIAAEgAAAAAAAAAAAAowGgAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFIAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-19T23:31:21.103Z",
               "EditorCaption": ""

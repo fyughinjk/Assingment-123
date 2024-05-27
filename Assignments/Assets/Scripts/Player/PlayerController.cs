@@ -7,6 +7,22 @@ public class PlayerController : MonoBehaviour
 {
     public bool TestMode;
 
+    private int _lives;
+
+    public int lives
+    {
+        get => _lives;
+        set
+        {
+            if (value <= 0) GameOver();
+            if (value < _lives) Respawn();
+            _lives = value;
+
+            Debug.Log($"Lives have been set to {_lives}");
+        }
+    }
+    [SerializeField] private int maxLives = 5;
+
     [SerializeField] private int speed;
     [SerializeField] private int jumpForce = 3;
 
@@ -62,6 +78,11 @@ public class PlayerController : MonoBehaviour
             if (TestMode) Debug.Log("Ground Check Tranform created via code.");
         }
 
+        if (maxLives <= 0)
+        {
+            maxLives = 5;
+        }
+        lives = maxLives;
        
     }
 
@@ -82,6 +103,10 @@ public class PlayerController : MonoBehaviour
             {
                 Vector2 moveDirection = new Vector2(xInput * speed, rb.velocity.y);
                   rb.velocity = moveDirection;
+            if ( Input.GetButtonDown("Fire1"))
+                {
+                anim.SetTrigger("Attack");
+                }
             }
         }
 
@@ -97,15 +122,22 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("JumpAttack");
         }
 
-            if ( Input.GetButtonDown("Fire1"))
-        {
-            anim.SetTrigger("Attack");
-        }
+
 
         if (xInput != 0) sr.flipX = (xInput < 0);
 
         anim.SetFloat("Speed", Mathf.Abs(xInput));
         anim.SetBool("isGrounded", isGrounded);
         
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Game Over goes here");
+    }
+
+    private void Respawn()
+    {
+        Debug.Log("Respawn goes here");
     }
 }

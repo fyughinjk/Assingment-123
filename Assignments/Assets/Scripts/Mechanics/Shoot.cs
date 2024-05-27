@@ -44,7 +44,6 @@ public class Shoot : MonoBehaviour
             curProjectile.yVel = yVel;
             
         }
-
     }
    
 }

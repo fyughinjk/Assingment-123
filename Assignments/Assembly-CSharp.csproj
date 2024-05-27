@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Mechanics\Projectile.cs" />
     <Compile Include="Assets\Scripts\Player\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\PickUp.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
