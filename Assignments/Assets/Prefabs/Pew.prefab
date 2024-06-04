@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7413691957239205398}
   m_Layer: 0
   m_Name: Pew
-  m_TagString: Untagged
+  m_TagString: Player PewPew
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6030d7e47d753c5438b272d4cbe24f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 0
+  lifetime: 1
   xVel: 0
   yVel: 0
 --- !u!50 &7046508187289848555

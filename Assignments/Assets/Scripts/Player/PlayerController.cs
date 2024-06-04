@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
@@ -7,20 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public bool TestMode;
 
-    private int _lives;
-
-    public int lives
-    {
-        get => _lives;
-        set
-        {
-            if (value <= 0) GameOver();
-            if (value < _lives) Respawn();
-            _lives = value;
-
-            Debug.Log($"Lives have been set to {_lives}");
-        }
-    }
+   
     [SerializeField] private int maxLives = 5;
 
     [SerializeField] private int speed;
@@ -30,11 +17,64 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask isGroundLayer;
-    [SerializeField] private float groundCheckRadius; 
+    [SerializeField] private float groundCheckRadius;
+    
+    [SerializeField] private bool isOnWall;
+    [SerializeField] private Transform WallClingCheck;
+    [SerializeField] private LayerMask isWalledLayer;
+    [SerializeField] private float WallCheckRadius;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Animator anim;
+
+     private Coroutine jumpForceChange = null;
+    private Coroutine speedChange = null;
+
+    public void PowerupValueChange(PickUp.PickupType type)
+    {
+        if (type == PickUp.PickupType.PowerupSpeed)
+            FillSpecificCoroutineVar(ref speedChange,ref speed, type);
+
+        if (type == PickUp.PickupType.PowerupJump)
+            FillSpecificCoroutineVar(ref jumpForceChange,ref jumpForce, type);
+    }
+
+    void FillSpecificCoroutineVar(ref Coroutine inVar, ref int varToChange, PickUp.PickupType type)
+    {
+        if (inVar != null)
+        {
+            StopCoroutine(inVar);
+            inVar = null;
+            varToChange /= 2;
+            inVar = StartCoroutine(ValueChangeCoroutine(type));
+            return;
+        }
+
+        inVar = StartCoroutine(ValueChangeCoroutine(type));
+    }
+    IEnumerator ValueChangeCoroutine(PickUp.PickupType type)
+    {
+        if (type == PickUp.PickupType.PowerupSpeed)
+            speed *= 2;
+        if (type == PickUp.PickupType.PowerupJump)
+            jumpForce *= 2;
+        
+        yield return new WaitForSeconds(2.0f);
+
+        if (type == PickUp.PickupType.PowerupSpeed)
+        {
+            speed /= 2;
+            speedChange = null;
+        }
+        if (type == PickUp.PickupType.PowerupJump)
+        {
+            jumpForce /= 2;
+            jumpForceChange = null;
+        }
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -78,11 +118,7 @@ public class PlayerController : MonoBehaviour
             if (TestMode) Debug.Log("Ground Check Tranform created via code.");
         }
 
-        if (maxLives <= 0)
-        {
-            maxLives = 5;
-        }
-        lives = maxLives;
+       
        
     }
 
@@ -110,7 +146,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-       
+
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {

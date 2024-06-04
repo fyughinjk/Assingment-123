@@ -1,25 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    public enum PickupType
+   public enum PickupType
     {
-        Life = 0,
-        Powerup = 1,
-        Score = 2,
-    }
-    [SerializeField] private PickupType type;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        Life, 
+        PowerupSpeed,
+        PowerupJump,
+        Score
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private PickupType type;
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Player"))
+        {
+            switch (type)
+            {
+                case PickupType.Life:
+                    GameManager.Instance.lives++;
+                    break;
+                case PickupType.Score:
+                    Debug.Log("I should be changing some sort of variable!");
+                    break;
+                case PickupType.PowerupSpeed:
+                case PickupType.PowerupJump:
+                    GameManager.Instance.PlayerInstance.PowerupValueChange(type);
+                    Debug.Log("I should be doing power up things!");
+                    break;
+            }
+
+            Destroy(gameObject);
+        }
     }
 }
+
