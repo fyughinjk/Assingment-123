@@ -6,15 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
-
     public bool TestMode;
-
-
-
-
     [SerializeField] private int speed;
     [SerializeField] private int jumpForce = 3;
-
 
     [SerializeField] private bool isGrounded;
     [SerializeField] private Transform groundCheck;
@@ -24,9 +18,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip jumpClip;
 
     [SerializeField] private bool isOnWall;
-    [SerializeField] private Transform WallClingCheck;
-    [SerializeField] private LayerMask isWalledLayer;
-    [SerializeField] private float WallCheckRadius;
+    [SerializeField] private bool wallOnRight;
+    [SerializeField] private bool wallOnLeft;
+    [SerializeField] private Transform wallCheckRight;
+    [SerializeField] private Transform wallCheckLeft;
+    [SerializeField] private LayerMask isWallLayer;
+    [SerializeField] private bool isSliding;
+    [SerializeField] private float wallSlideSpeed = 0.5f;
+    [SerializeField] private float wallCheckRadius = 1f;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -54,9 +53,9 @@ public class PlayerController : MonoBehaviour
 
         inVar = StartCoroutine(ValueChangeCoroutine(type));
     }
+
     IEnumerator ValueChangeCoroutine(PickUp.PickupType type)
     {
-
         if (type == PickUp.PickupType.PowerupJump)
             jumpForce *= 2;
 
@@ -69,16 +68,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-
 
         if (speed <= 0)
         {
@@ -90,6 +85,12 @@ public class PlayerController : MonoBehaviour
         {
             jumpForce = 6;
             if (TestMode) Debug.Log("Jump Force set to default Value.");
+        }
+
+        if (wallCheckRadius <= 0)
+        {
+            wallCheckRadius = 1f;
+            if (TestMode) Debug.Log("Wall Check Radius set to default Value.");
         }
 
         if (groundCheckRadius <= 0)
@@ -115,15 +116,27 @@ public class PlayerController : MonoBehaviour
             if (TestMode) Debug.Log("Ground Check Tranform created via code.");
         }
 
-        
+        if (wallCheckRight == null)
+        {
+            GameObject newObj = new GameObject();
+            newObj.transform.SetParent(transform);
+            newObj.transform.localPosition = new Vector3(0.5f, 0.8f, 0);
+            newObj.name = "WallCheckRight";
+            wallCheckRight = newObj.transform;
+            if (TestMode) Debug.Log("Wall Check Right Tranform created via code.");
+        }
 
-
-
+        if (wallCheckLeft == null)
+        {
+            GameObject newObj = new GameObject();
+            newObj.transform.SetParent(transform);
+            newObj.transform.localPosition = new Vector3(-0.5f, 0.8f, 0);
+            newObj.name = "WallCheckLeft";
+            wallCheckLeft = newObj.transform;
+            if (TestMode) Debug.Log("Wall Check Left Tranform created via code.");
+        }
     }
 
-
-
-    // Update is called once per frame
     void Update()
     {
         AnimatorClipInfo[] curPlayingClips = anim.GetCurrentAnimatorClipInfo(0);
@@ -131,6 +144,11 @@ public class PlayerController : MonoBehaviour
         float xInput = Input.GetAxis("Horizontal");
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
+        wallOnRight = Physics2D.OverlapCircle(wallCheckRight.position, wallCheckRadius, isWallLayer);
+        wallOnLeft = Physics2D.OverlapCircle(wallCheckLeft.position, wallCheckRadius, isWallLayer);
+        isOnWall = wallOnRight || wallOnLeft;
+
+        Debug.Log($"isGrounded: {isGrounded}, wallOnRight: {wallOnRight}, wallOnLeft: {wallOnLeft}");
 
         if (curPlayingClips.Length > 0)
         {
@@ -148,26 +166,61 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (isOnWall && !isGrounded)
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            audioSource.PlayOneShot(jumpClip);
+            isSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
+        }
+        else
+        {
+            isSliding = false;
         }
 
-        if (Input.GetButtonDown("Jump") && !isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
-            anim.SetTrigger("JumpAttack");
+            if (isGrounded)
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                audioSource.PlayOneShot(jumpClip);
+            }
+            else if (isSliding)
+            {
+                if (wallOnRight)
+                {
+
+                }
+                float jumpDirection = wallOnRight ? -1 : 1;
+                rb.velocity = new Vector2(jumpDirection * speed, jumpForce);
+                audioSource.PlayOneShot(jumpClip);
+
+
+                sr.flipX = wallOnRight;
+
+
+                isSliding = false;
+            }
+            else
+            {
+                anim.SetTrigger("JumpAttack");
+            }
         }
-
-
 
         if (xInput != 0) sr.flipX = (xInput < 0);
 
         anim.SetFloat("Speed", Mathf.Abs(xInput));
         anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isSliding", isSliding);
+        anim.SetBool("isOnWall", isOnWall);
+    }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(wallCheckRight.position, wallCheckRadius);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(wallCheckLeft.position, wallCheckRadius);
     }
 
     private void GameOver()
@@ -179,7 +232,4 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Respawn goes here");
     }
-
-
-
 }

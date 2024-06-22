@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1757428681542568799}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2320097074090156033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4085772211738099918}
+  m_Layer: 0
+  m_Name: WallCheckRight
+  m_TagString: WallCheck
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4085772211738099918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2320097074090156033}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 0.95000076, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1757428681542568799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2847668734652312478
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,13 +156,15 @@ Transform:
   m_GameObject: {fileID: 6483271055449097772}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -118.82, y: 34.24, z: 0}
+  m_LocalPosition: {x: -118.82, y: 34.023, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6076552530729378471}
   - {fileID: 6358332393340039461}
   - {fileID: 6110500073940383124}
+  - {fileID: 4085772211738099918}
+  - {fileID: 7817751461414128156}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &693977150859238260
@@ -281,11 +314,16 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   jumpClip: {fileID: 0}
   isOnWall: 0
-  WallClingCheck: {fileID: 0}
-  isWalledLayer:
+  wallOnRight: 0
+  wallOnLeft: 0
+  wallCheckRight: {fileID: 4085772211738099918}
+  wallCheckLeft: {fileID: 7817751461414128156}
+  isWallLayer:
     serializedVersion: 2
-    m_Bits: 0
-  WallCheckRadius: 0
+    m_Bits: 64
+  isSliding: 0
+  wallSlideSpeed: 0.5
+  wallCheckRadius: 0.3
 --- !u!95 &8278440867641844111
 Animator:
   serializedVersion: 5
@@ -420,3 +458,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6590322209150709523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7817751461414128156}
+  m_Layer: 0
+  m_Name: WallCheckLeft
+  m_TagString: WallCheck
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7817751461414128156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590322209150709523}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5, y: 0.95000076, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1757428681542568799}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

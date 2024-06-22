@@ -12,6 +12,7 @@ TagManager:
   - Player PewPew
   - Enemy PewPew
   - EnemyTurret
+  - WallCheck
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 
