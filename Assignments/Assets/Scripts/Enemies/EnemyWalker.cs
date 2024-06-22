@@ -41,7 +41,6 @@ public class EnemyWalker : Enemy
         if (collision.CompareTag("Barrier"))
         {
             sr.flipX = !sr.flipX;
-            anim.SetTrigger("TurnAround");
         }
     }
 }

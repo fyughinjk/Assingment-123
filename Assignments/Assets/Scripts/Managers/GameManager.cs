@@ -1,12 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
     static GameManager _instance;
     public static GameManager Instance => _instance;
+
+    public Action<int> OnLifeValueChange;
+
+    //public UnityEvent<int> OnLifeValueChange;
 
     private int _lives;
     public int lives
@@ -22,6 +27,8 @@ public class GameManager : MonoBehaviour
             if (value < _lives) Respawn();
             if (value > maxLives) value = maxLives;
             _lives = value;
+
+            OnLifeValueChange?.Invoke(_lives);
 
             Debug.Log($"Lives have been set to {_lives}");
         }
@@ -73,9 +80,14 @@ public class GameManager : MonoBehaviour
 
         if (lives == 0)
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
             
+    }
+
+    public void LoadScene(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
     }
 
     private void GameOver()

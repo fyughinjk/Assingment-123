@@ -8,8 +8,10 @@ TagManager:
   - Wall
   - Enemy
   - PlayerProjectile
-  - EnemyProjectile
   - Barrier
+  - Player PewPew
+  - Enemy PewPew
+  - EnemyTurret
   layers:
   - Default
   - TransparentFX

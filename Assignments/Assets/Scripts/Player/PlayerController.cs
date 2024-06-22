@@ -3,12 +3,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
+
     public bool TestMode;
 
-   
-    [SerializeField] private int maxLives = 5;
+
+
 
     [SerializeField] private int speed;
     [SerializeField] private int jumpForce = 3;
@@ -18,7 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask isGroundLayer;
     [SerializeField] private float groundCheckRadius;
-    
+
+    [SerializeField] private AudioClip jumpClip;
+
     [SerializeField] private bool isOnWall;
     [SerializeField] private Transform WallClingCheck;
     [SerializeField] private LayerMask isWalledLayer;
@@ -27,17 +31,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Animator anim;
+    private AudioSource audioSource;
 
-     private Coroutine jumpForceChange = null;
-    private Coroutine speedChange = null;
+    private Coroutine jumpForceChange = null;
 
     public void PowerupValueChange(PickUp.PickupType type)
     {
-        if (type == PickUp.PickupType.PowerupSpeed)
-            FillSpecificCoroutineVar(ref speedChange,ref speed, type);
-
         if (type == PickUp.PickupType.PowerupJump)
-            FillSpecificCoroutineVar(ref jumpForceChange,ref jumpForce, type);
+            FillSpecificCoroutineVar(ref jumpForceChange, ref jumpForce, type);
     }
 
     void FillSpecificCoroutineVar(ref Coroutine inVar, ref int varToChange, PickUp.PickupType type)
@@ -55,18 +56,12 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator ValueChangeCoroutine(PickUp.PickupType type)
     {
-        if (type == PickUp.PickupType.PowerupSpeed)
-            speed *= 2;
+
         if (type == PickUp.PickupType.PowerupJump)
             jumpForce *= 2;
-        
+
         yield return new WaitForSeconds(2.0f);
 
-        if (type == PickUp.PickupType.PowerupSpeed)
-        {
-            speed /= 2;
-            speedChange = null;
-        }
         if (type == PickUp.PickupType.PowerupJump)
         {
             jumpForce /= 2;
@@ -78,11 +73,13 @@ public class PlayerController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
-        rb = GetComponent<Rigidbody2D>(); 
+    {
+        rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        
+        audioSource = GetComponent<AudioSource>();
+
+
         if (speed <= 0)
         {
             speed = 7;
@@ -118,9 +115,13 @@ public class PlayerController : MonoBehaviour
             if (TestMode) Debug.Log("Ground Check Tranform created via code.");
         }
 
-       
-       
+        
+
+
+
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -131,17 +132,18 @@ public class PlayerController : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
 
-       if (curPlayingClips.Length > 0)
+        if (curPlayingClips.Length > 0)
         {
             if (curPlayingClips[0].clip.name == "Attack")
                 rb.velocity = Vector2.zero;
             else
             {
                 Vector2 moveDirection = new Vector2(xInput * speed, rb.velocity.y);
-                  rb.velocity = moveDirection;
-            if ( Input.GetButtonDown("Fire1"))
+                rb.velocity = moveDirection;
+                if (Input.GetButtonDown("Fire1"))
                 {
-                anim.SetTrigger("Attack");
+                    anim.SetTrigger("Attack");
+                    audioSource.Play();
                 }
             }
         }
@@ -151,6 +153,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            audioSource.PlayOneShot(jumpClip);
         }
 
         if (Input.GetButtonDown("Jump") && !isGrounded)
@@ -164,7 +167,7 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat("Speed", Mathf.Abs(xInput));
         anim.SetBool("isGrounded", isGrounded);
-        
+
     }
 
     private void GameOver()
@@ -176,4 +179,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Respawn goes here");
     }
+
+
+
 }
