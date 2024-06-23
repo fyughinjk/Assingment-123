@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     public bool TestMode;
     [SerializeField] private int speed;
-    [SerializeField] private int jumpForce = 3;
+    [SerializeField] private int jumpForce = 6;
 
+    [SerializeField] private bool isOnWall;
+    [SerializeField] private bool isSliding;
     [SerializeField] private bool isGrounded;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask isGroundLayer;
@@ -17,15 +19,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioClip jumpClip;
 
-    [SerializeField] private bool isOnWall;
-    [SerializeField] private bool wallOnRight;
-    [SerializeField] private bool wallOnLeft;
-    [SerializeField] private Transform wallCheckRight;
-    [SerializeField] private Transform wallCheckLeft;
-    [SerializeField] private LayerMask isWallLayer;
-    [SerializeField] private bool isSliding;
-    [SerializeField] private float wallSlideSpeed = 0.5f;
-    [SerializeField] private float wallCheckRadius = 1f;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -87,11 +80,6 @@ public class PlayerController : MonoBehaviour
             if (TestMode) Debug.Log("Jump Force set to default Value.");
         }
 
-        if (wallCheckRadius <= 0)
-        {
-            wallCheckRadius = 1f;
-            if (TestMode) Debug.Log("Wall Check Radius set to default Value.");
-        }
 
         if (groundCheckRadius <= 0)
         {
@@ -116,25 +104,7 @@ public class PlayerController : MonoBehaviour
             if (TestMode) Debug.Log("Ground Check Tranform created via code.");
         }
 
-        if (wallCheckRight == null)
-        {
-            GameObject newObj = new GameObject();
-            newObj.transform.SetParent(transform);
-            newObj.transform.localPosition = new Vector3(0.5f, 0.8f, 0);
-            newObj.name = "WallCheckRight";
-            wallCheckRight = newObj.transform;
-            if (TestMode) Debug.Log("Wall Check Right Tranform created via code.");
-        }
 
-        if (wallCheckLeft == null)
-        {
-            GameObject newObj = new GameObject();
-            newObj.transform.SetParent(transform);
-            newObj.transform.localPosition = new Vector3(-0.5f, 0.8f, 0);
-            newObj.name = "WallCheckLeft";
-            wallCheckLeft = newObj.transform;
-            if (TestMode) Debug.Log("Wall Check Left Tranform created via code.");
-        }
     }
 
     void Update()
@@ -144,11 +114,7 @@ public class PlayerController : MonoBehaviour
         float xInput = Input.GetAxis("Horizontal");
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, isGroundLayer);
-        wallOnRight = Physics2D.OverlapCircle(wallCheckRight.position, wallCheckRadius, isWallLayer);
-        wallOnLeft = Physics2D.OverlapCircle(wallCheckLeft.position, wallCheckRadius, isWallLayer);
-        isOnWall = wallOnRight || wallOnLeft;
 
-        Debug.Log($"isGrounded: {isGrounded}, wallOnRight: {wallOnRight}, wallOnLeft: {wallOnLeft}");
 
         if (curPlayingClips.Length > 0)
         {
@@ -166,15 +132,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isOnWall && !isGrounded)
-        {
-            isSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, -wallSlideSpeed);
-        }
-        else
-        {
-            isSliding = false;
-        }
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -182,26 +139,12 @@ public class PlayerController : MonoBehaviour
             {
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 audioSource.PlayOneShot(jumpClip);
+                Debug.Log("Ground Jump");
             }
-            else if (isSliding)
-            {
-                if (wallOnRight)
-                {
-
-                }
-                float jumpDirection = wallOnRight ? -1 : 1;
-                rb.velocity = new Vector2(jumpDirection * speed, jumpForce);
-                audioSource.PlayOneShot(jumpClip);
-
-
-                sr.flipX = wallOnRight;
-
-
-                isSliding = false;
-            }
-            else
+            else if (!isGrounded && !isSliding)
             {
                 anim.SetTrigger("JumpAttack");
+                Debug.Log("Jump Attack");
             }
         }
 
@@ -209,18 +152,18 @@ public class PlayerController : MonoBehaviour
 
         anim.SetFloat("Speed", Mathf.Abs(xInput));
         anim.SetBool("isGrounded", isGrounded);
-        anim.SetBool("isSliding", isSliding);
         anim.SetBool("isOnWall", isOnWall);
+        anim.SetBool("isSliding", isSliding);
     }
 
-    private void OnDrawGizmos()
+    public void SetisOnWall(bool value)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(wallCheckRight.position, wallCheckRadius);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(wallCheckLeft.position, wallCheckRadius);
+        isOnWall = value;
+    }
+
+    public void SetisSliding(bool value)
+    {
+        isSliding = value;
     }
 
     private void GameOver()

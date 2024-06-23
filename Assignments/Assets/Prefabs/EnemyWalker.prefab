@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  Death: {fileID: 8300000, guid: 99467caaa9ee6ea4f9d2d6d8b49d136f, type: 3}
   xVel: 0
 --- !u!61 &7549447036218911938
 BoxCollider2D:

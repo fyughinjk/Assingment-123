@@ -3092,7 +3092,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon Sprites_142
+      name: Lives
       rect:
         serializedVersion: 2
         x: 163
@@ -3548,7 +3548,6 @@ TextureImporter:
       Dungeon Sprites_14: 1027431769
       Dungeon Sprites_140: 1457264351
       Dungeon Sprites_141: -1034054015
-      Dungeon Sprites_142: 1624904802
       Dungeon Sprites_143: 1420602005
       Dungeon Sprites_144: -116765346
       Dungeon Sprites_145: -1110555937
@@ -3660,6 +3659,7 @@ TextureImporter:
       Dungeon Sprites_99: -1354692597
       Jump: 1654455615
       Life: 465548825
+      Lives: 1624904802
       Moneys: 1756285360
       Speed: 1338728130
   mipmapLimitGroupName: 

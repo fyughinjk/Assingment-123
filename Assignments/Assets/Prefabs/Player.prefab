@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 3672037597212307663}
   - component: {fileID: 4798459388276115006}
   - component: {fileID: 8406287234501744225}
+  - component: {fileID: -206700830002713439}
   - component: {fileID: 8278440867641844111}
   - component: {fileID: 1461252869341329097}
   - component: {fileID: 4733025258671131838}
@@ -303,27 +304,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20344b5e33820f64b8a87de004b725e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestMode: 0
+  TestMode: 1
   speed: 0
   jumpForce: 6
+  isOnWall: 0
+  isSliding: 0
   isGrounded: 0
   groundCheck: {fileID: 6076552530729378471}
   isGroundLayer:
     serializedVersion: 2
     m_Bits: 8
   groundCheckRadius: 0.2
-  jumpClip: {fileID: 0}
-  isOnWall: 0
-  wallOnRight: 0
-  wallOnLeft: 0
+  jumpClip: {fileID: 8300000, guid: 08f09dbeb6ebece4ba3afbf0defe175a, type: 3}
+--- !u!114 &-206700830002713439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6483271055449097772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b358d941d9cba4ca09f61505da3dae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 6
+  wallSlideSpeed: 0.5
+  jumpCooldown: 0.2
   wallCheckRight: {fileID: 4085772211738099918}
   wallCheckLeft: {fileID: 7817751461414128156}
   isWallLayer:
     serializedVersion: 2
     m_Bits: 64
-  isSliding: 0
-  wallSlideSpeed: 0.5
-  wallCheckRadius: 0.3
+  wallCheckRadius: 0.2
+  jumpClip: {fileID: 8300000, guid: 08f09dbeb6ebece4ba3afbf0defe175a, type: 3}
 --- !u!95 &8278440867641844111
 Animator:
   serializedVersion: 5
@@ -371,7 +385,7 @@ AudioSource:
   m_GameObject: {fileID: 6483271055449097772}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8265515277186806348, guid: c3b1052993dd5c1449c1757c1fda5dba, type: 2}
   m_audioClip: {fileID: 8300000, guid: 40255177b58649f4599261df75349b59, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

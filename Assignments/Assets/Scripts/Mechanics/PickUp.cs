@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-
 [RequireComponent(typeof(AudioSource))]
-
 public class PickUp : MonoBehaviour
 {
-
-    AudioSource  audioSource;
-   public enum PickupType
+    AudioSource audioSource;
+    public enum PickupType
     {
-        Life, 
+        Life,
         PowerupJump,
         Score
     }
 
     [SerializeField] private PickupType type;
+    [SerializeField] private int scoreAmount = 10;
 
     private void Start()
     {
@@ -34,6 +31,7 @@ public class PickUp : MonoBehaviour
                     GameManager.Instance.lives++;
                     break;
                 case PickupType.Score:
+                    GameManager.Instance.AddScore(scoreAmount);
                     Debug.Log("I should be changing some sort of variable!");
                     break;
                 case PickupType.PowerupJump:
@@ -48,4 +46,3 @@ public class PickUp : MonoBehaviour
         }
     }
 }
-

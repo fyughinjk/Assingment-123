@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6030d7e47d753c5438b272d4cbe24f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDeath: {fileID: 8300000, guid: 954cc5e05c380bb4b81dbdd8e12bfe29, type: 3}
   lifetime: 1
   xVel: 0
   yVel: 0
